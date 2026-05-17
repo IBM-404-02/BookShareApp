@@ -1,0 +1,82 @@
+<Window x:Class="BookShareApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Читай, Пиши и не спиши"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgBrush}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
+            <DockPanel LastChildFill="False">
+                <TextBlock DockPanel.Dock="Top"
+                           Text="&#xE736;"
+                           FontFamily="Segoe MDL2 Assets"
+                           FontSize="28"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,16,0,16"/>
+
+                <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
+                    <Button x:Name="BtnCatalog"
+                            Style="{StaticResource SidebarButton}"
+                            Content="&#xE82D;"
+                            ToolTip="Каталог книг"
+                            Click="BtnCatalog_Click"/>
+
+                    <Button x:Name="BtnLists"
+                            Style="{StaticResource SidebarButton}"
+                            Content="&#xE71D;"
+                            ToolTip="Списки книг"
+                            Click="BtnLists_Click"/>
+
+                    <Button x:Name="BtnAdmin"
+                            Style="{StaticResource SidebarButton}"
+                            Content="&#xE713;"
+                            ToolTip="Администрирование"
+                            Visibility="Collapsed"
+                            Click="BtnAdmin_Click"/>
+
+                    <Button x:Name="BtnAuthor"
+                            Style="{StaticResource SidebarButton}"
+                            Content="&#xE70F;"
+                            ToolTip="Страница автора"
+                            Visibility="Collapsed"
+                            Click="BtnAuthor_Click"/>
+
+                    <Button x:Name="BtnFrozen"
+                            Style="{StaticResource SidebarButton}"
+                            Content="&#xE7BA;"
+                            ToolTip="Аккаунт заморожен"
+                            Foreground="#FFD78A"
+                            Visibility="Collapsed"
+                            Click="BtnFrozen_Click"/>
+                </StackPanel>
+
+                <Button DockPanel.Dock="Bottom"
+                        Style="{StaticResource SidebarButton}"
+                        Content="&#xE7E8;"
+                        ToolTip="Выйти из аккаунта"
+                        Margin="0,0,0,8"
+                        HorizontalAlignment="Center"
+                        Click="BtnLogout_Click"/>
+                <Button DockPanel.Dock="Bottom"
+                        x:Name="BtnProfile"
+                        Style="{StaticResource SidebarButton}"
+                        Content="&#xE77B;"
+                        ToolTip="Профиль"
+                        HorizontalAlignment="Center"
+                        Click="BtnProfile_Click"/>
+            </DockPanel>
+        </Border>
+
+        <Frame x:Name="MainFrame"
+               Grid.Column="1"
+               NavigationUIVisibility="Hidden"
+               Background="{StaticResource BgBrush}"/>
+    </Grid>
+</Window>

@@ -1,0 +1,34 @@
+<Page x:Class="BookShareApp.Pages.FrozenWarningPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Аккаунт заморожен"
+      Background="{StaticResource BgBrush}">
+    <Grid Margin="24">
+        <Border Background="#FDECEA"
+                CornerRadius="8" Padding="24"
+                BorderThickness="2" BorderBrush="{StaticResource DangerBrush}"
+                VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Ваш аккаунт заморожен"
+                           FontSize="24" FontWeight="Bold"
+                           Foreground="{StaticResource DangerBrush}"/>
+                <TextBlock Text="Пока ваш аккаунт заморожен, доступ к функциям платформы ограничен."
+                           TextWrapping="Wrap" Margin="0,8,0,12"/>
+
+                <TextBlock Text="Причина заморозки:" FontWeight="Bold" Margin="0,4,0,4"/>
+                <TextBlock x:Name="ReasonText" TextWrapping="Wrap"
+                           Foreground="{StaticResource DangerBrush}" Margin="0,0,0,16"/>
+
+                <TextBlock Text="Текст апелляции (объясните администратору, почему заморозку стоит снять):"
+                           FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBox x:Name="AppealBox" TextWrapping="Wrap" AcceptsReturn="True"
+                         Padding="6" Height="120" VerticalScrollBarVisibility="Auto"/>
+
+                <Button Content="Подать апелляцию"
+                        Click="Appeal_Click"
+                        Style="{StaticResource PrimaryButton}"
+                        HorizontalAlignment="Left" Padding="20,8" Margin="0,12,0,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

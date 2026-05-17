@@ -1,0 +1,97 @@
+<Page x:Class="BookShareApp.Pages.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Профиль"
+      Background="{StaticResource BgBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Мой профиль"
+                       FontSize="26" FontWeight="Bold"
+                       Foreground="{StaticResource PrimaryBrush}"
+                       Margin="0,0,0,16"/>
+            
+            <Border Grid.Row="1" Background="{StaticResource CardBrush}"
+                    CornerRadius="8" Padding="20" Margin="0,0,0,16"
+                    BorderThickness="1" BorderBrush="#E0D5EB">
+                <StackPanel>
+                    <TextBlock x:Name="FullNameText" FontSize="20" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock x:Name="LoginText" FontSize="14"
+                               Foreground="{StaticResource MutedBrush}" Margin="0,4,0,0"/>
+                    <TextBlock x:Name="EmailText" FontSize="14"
+                               Foreground="{StaticResource MutedBrush}" Margin="0,2,0,0"/>
+                    <TextBlock x:Name="RoleText" FontSize="14" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryBrush}" Margin="0,8,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <Border x:Name="FrozenPanel" Grid.Row="2" Visibility="Collapsed"
+                    Background="#FDECEA" CornerRadius="8" Padding="16"
+                    BorderThickness="1" BorderBrush="{StaticResource DangerBrush}"
+                    Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Ваш аккаунт заморожен"
+                               FontWeight="Bold" FontSize="16"
+                               Foreground="{StaticResource DangerBrush}"/>
+                    <TextBlock x:Name="FrozenReasonText" TextWrapping="Wrap" Margin="0,6,0,8"/>
+                    <Button Content="Подать апелляцию"
+                            Click="Appeal_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            HorizontalAlignment="Left" Padding="14,6"/>
+                </StackPanel>
+            </Border>
+
+            <Border x:Name="AuthorRequestPanel" Grid.Row="3"
+                    Background="{StaticResource CardBrush}" CornerRadius="8" Padding="16"
+                    BorderThickness="1" BorderBrush="#E0D5EB" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Стать автором"
+                               FontWeight="Bold" FontSize="16"
+                               Foreground="{StaticResource PrimaryBrush}"/>
+                    <TextBlock Text="Подайте заявку, чтобы публиковать свои книги."
+                               TextWrapping="Wrap" Margin="0,4,0,8"/>
+                    <Button x:Name="AuthorRequestButton"
+                            Content="Подать заявку"
+                            Click="AuthorRequest_Click"
+                            Style="{StaticResource PrimaryButton}"
+                            HorizontalAlignment="Left" Padding="14,6"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Row="4">
+                <TextBlock Text="Мои отзывы" FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource PrimaryBrush}" Margin="0,0,0,8"/>
+                <ItemsControl x:Name="ReviewsList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{StaticResource CardBrush}"
+                                    CornerRadius="6" Padding="12" Margin="0,0,0,8"
+                                    BorderThickness="1" BorderBrush="#E0D5EB">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding BookTitle}"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource PrimaryBrush}"/>
+                                    <TextBlock Text="{Binding Stars}"
+                                               Foreground="#D4A100" FontSize="14"/>
+                                    <TextBlock Text="{Binding Text}"
+                                               TextWrapping="Wrap" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Name="NoReviewsText" Text="У вас пока нет отзывов."
+                           Foreground="{StaticResource MutedBrush}"
+                           Visibility="Collapsed"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

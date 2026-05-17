@@ -1,0 +1,79 @@
+<Page x:Class="BookShareApp.Pages.AddEditBookPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Книга"
+      Background="{StaticResource BgBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="HeaderText" Grid.Row="0"
+                       Text="Добавить новую книгу"
+                       FontSize="26" FontWeight="Bold"
+                       Foreground="{StaticResource PrimaryBrush}"
+                       Margin="0,0,0,16"/>
+
+            <Border Grid.Row="1" Background="{StaticResource CardBrush}"
+                    CornerRadius="8" Padding="20" Margin="0,0,0,16"
+                    BorderThickness="1" BorderBrush="#E0D5EB">
+                <StackPanel>
+                    <TextBlock Text="Название" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <TextBox x:Name="TitleBox" Margin="0,0,0,12" Padding="6"/>
+
+                    <TextBlock Text="Описание" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <TextBox x:Name="DescriptionBox" Margin="0,0,0,12"
+                             Padding="6" TextWrapping="Wrap" AcceptsReturn="True"
+                             Height="80" VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBlock Text="Путь к обложке (необязательно)" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="CoverPathBox" Padding="6" Grid.Column="0"/>
+                        <Button Grid.Column="1" Content="Обзор..." Margin="8,0,0,0"
+                                Click="Browse_Click" Padding="14,4"/>
+                    </Grid>
+
+                    <TextBlock Text="Содержимое книги (текст)" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <TextBox x:Name="ContentBox" Padding="6"
+                             TextWrapping="Wrap" AcceptsReturn="True"
+                             Height="220" VerticalScrollBarVisibility="Auto"
+                             FontFamily="Consolas"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="2" Background="{StaticResource CardBrush}"
+                    CornerRadius="8" Padding="20" Margin="0,0,0,16"
+                    BorderThickness="1" BorderBrush="#E0D5EB">
+                <StackPanel>
+                    <TextBlock Text="Жанры" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <ItemsControl x:Name="GenresList">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Name}" Tag="{Binding Id}"
+                                          Margin="0,4,16,4"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button Content="Сохранить" Click="Save_Click"
+                                Style="{StaticResource PrimaryButton}"
+                                Padding="20,8" Margin="0,0,8,0"/>
+                        <Button Content="Отмена" Click="Cancel_Click"
+                                Padding="20,8"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,93 @@
+<Page x:Class="BookShareApp.Pages.BookListsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Списки книг"
+      Background="{StaticResource BgBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Мои списки книг"
+                   FontSize="26" FontWeight="Bold"
+                   Foreground="{StaticResource PrimaryBrush}"
+                   Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
+            <RadioButton x:Name="TabPlanned"   Content="В планах"   GroupName="List" Checked="Tab_Checked" Tag="Planned"   Style="{StaticResource {x:Type ToggleButton}}" Margin="0,0,8,0" Padding="14,8" Background="{StaticResource AccentBrush}" Cursor="Hand"/>
+            <RadioButton x:Name="TabReading"   Content="Читаю"      GroupName="List" Checked="Tab_Checked" Tag="Reading"   Style="{StaticResource {x:Type ToggleButton}}" Margin="0,0,8,0" Padding="14,8" Background="{StaticResource AccentBrush}" Cursor="Hand" IsChecked="True"/>
+            <RadioButton x:Name="TabRead"      Content="Прочитано"  GroupName="List" Checked="Tab_Checked" Tag="Read"      Style="{StaticResource {x:Type ToggleButton}}" Margin="0,0,8,0" Padding="14,8" Background="{StaticResource AccentBrush}" Cursor="Hand"/>
+            <RadioButton x:Name="TabAbandoned" Content="Заброшено"  GroupName="List" Checked="Tab_Checked" Tag="Abandoned" Style="{StaticResource {x:Type ToggleButton}}" Padding="14,8" Background="{StaticResource AccentBrush}" Cursor="Hand"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SearchBox" Grid.Column="0" Margin="0,0,12,0"
+                     TextChanged="Filter_Changed" ToolTip="Поиск"/>
+            <ComboBox x:Name="SortBox" Grid.Column="1" Margin="0,0,12,0"
+                      SelectionChanged="ComboFilter_Changed">
+                <ComboBoxItem Content="Сортировка: по названию" IsSelected="True"/>
+                <ComboBoxItem Content="Сортировка: по оценке"/>
+            </ComboBox>
+            <ComboBox x:Name="GenreFilter" Grid.Column="2"
+                      DisplayMemberPath="Name"
+                      SelectionChanged="ComboFilter_Changed"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="BooksGrid">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="200" Height="280" Margin="8" Padding="12"
+                                Background="{StaticResource CardBrush}"
+                                CornerRadius="8" BorderThickness="1" BorderBrush="#E0D5EB">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text="{Binding Title}"
+                                           FontSize="16" FontWeight="Bold" TextWrapping="Wrap"
+                                           Foreground="{StaticResource PrimaryBrush}"/>
+                                <TextBlock DockPanel.Dock="Top" Text="{Binding AuthorName}"
+                                           FontSize="12" Foreground="{StaticResource MutedBrush}"
+                                           Margin="0,4,0,4"/>
+                                <TextBlock DockPanel.Dock="Top" Text="{Binding RatingText}"
+                                           FontWeight="Bold" Foreground="#D4A100"
+                                           Margin="0,0,0,8"/>
+                                <StackPanel DockPanel.Dock="Bottom">
+                                    <Button Content="Открыть"
+                                            Style="{StaticResource PrimaryButton}"
+                                            Click="OpenBook_Click" Tag="{Binding Id}"
+                                            Height="30" Margin="0,0,0,4"/>
+                                    <Button Content="Переместить..."
+                                            Click="MoveBook_Click" Tag="{Binding Id}"
+                                            Background="{StaticResource AccentBrush}"
+                                            Foreground="{StaticResource TextBrush}"
+                                            BorderThickness="0" Height="28" Cursor="Hand"
+                                            Margin="0,0,0,4"/>
+                                    <Button Content="Убрать из списка"
+                                            Click="RemoveBook_Click" Tag="{Binding Id}"
+                                            Background="Transparent"
+                                            Foreground="{StaticResource DangerBrush}"
+                                            BorderThickness="0" Height="22" Cursor="Hand"
+                                            FontSize="11"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Description}"
+                                           FontSize="11" TextWrapping="Wrap"
+                                           Foreground="{StaticResource TextBrush}"/>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>
