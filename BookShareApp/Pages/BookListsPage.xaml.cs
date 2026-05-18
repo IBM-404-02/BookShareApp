@@ -64,7 +64,14 @@ namespace BookShareApp.Pages
             else
                 q = q.OrderBy(b => b.Title);
 
-            BooksGrid.ItemsSource = q.ToList();
+            if (BooksGrid != null)
+            {
+                BooksGrid.ItemsSource = q.ToList();
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void Tab_Checked(object sender, RoutedEventArgs e)
